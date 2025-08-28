@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { IssueForm } from "@/app/validations/issueSchema";
+import { IssueForm } from "@/validations/issueSchema";
 import { issueSchema } from "@/app/validationSchemas";
 
 export const useIssueForm = () => {
