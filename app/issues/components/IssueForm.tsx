@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,10 +15,7 @@ import "easymde/dist/easymde.min.css";
 import { motion } from "framer-motion";
 import { useIssueForm } from "../hooks/useIssueForm";
 import { Issue } from "@prisma/client";
-
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+import SimpleMDE from "react-simplemde-editor";
 
 export default function IssueForm({ issue }: { issue?: Issue }) {
   const { form, onSubmit } = useIssueForm({ issue });

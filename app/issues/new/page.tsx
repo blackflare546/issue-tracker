@@ -1,6 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import "easymde/dist/easymde.min.css";
-import IssueForm from "../components/IssueForm";
+import dynamic from "next/dynamic";
+
+const IssueForm = dynamic(() => import("@/app/issues/components/IssueForm"), {
+  ssr: false,
+});
 
 export default function NewIssuePage() {
   return (
