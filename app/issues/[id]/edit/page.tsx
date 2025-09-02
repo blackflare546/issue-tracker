@@ -5,19 +5,18 @@ import { prisma } from "@/prisma/client";
 import { notFound } from "next/navigation";
 
 interface Props {
-  params:{id:string}
+  params: { id: string };
 }
 
-export default async function EditIssuePage ({params}:Props) {
+export default async function EditIssuePage({ params }: Props) {
+  const issue = await prisma.issue.findUnique({
+    where: { id: parseInt(params.id) },
+  });
 
-const issue = await prisma.issue.findUnique({
-  where:{id: parseInt(params.id)}
-})
+  if (!issue) notFound();
 
-if(!issue) notFound()
- 
   return (
-    <div className="max-w-2xl mx-auto ">
+    <div className="max-w-2xl mx-auto">
       <Card className="shadow-lg border border-slate-200 rounded-2xl">
         <CardHeader>
           <CardTitle className="text-2xl font-semibold text-slate-800">
@@ -25,7 +24,7 @@ if(!issue) notFound()
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <IssueForm issue={issue}/>
+          <IssueForm issue={issue} />
         </CardContent>
       </Card>
     </div>

@@ -5,27 +5,36 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { Issue } from "@prisma/client";
 import { IssueFormType, issueSchema } from "@/validations/issueSchema";
 
-
-export const useIssueForm = () => {
+export const useIssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
 
   const form = useForm<IssueFormType>({
     resolver: zodResolver(issueSchema),
+    defaultValues: {
+      title: issue?.title || "",
+      description: issue?.description || "",
+    },
   });
 
   const onSubmit = async (data: IssueFormType) => {
     try {
-      await axios.post("/api/issues", data);
-      toast.success("Issue created successfully!");
+      if (issue) {
+        await axios.patch(`/api/issues/${issue.id}`, data);
+        toast.success("Issue updated successfully!");
+      } else {
+        await axios.post("/api/issues", data);
+        toast.success("Issue created successfully!");
+      }
+
       router.push("/issues");
+      router.refresh();
     } catch (err) {
       if (axios.isAxiosError(err)) {
         const message =
-          err.response?.data?.message ||
-          "Failed to create issue (server error)";
+          err.response?.data?.message || "Failed to save issue (server error)";
         toast.error(message);
         console.error("Axios error:", err.response?.data || err.message);
       } else {
@@ -35,8 +44,5 @@ export const useIssueForm = () => {
     }
   };
 
-  return {
-    form,
-    onSubmit,
-  };
+  return { form, onSubmit };
 };

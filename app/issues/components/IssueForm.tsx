@@ -22,7 +22,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 });
 
 export default function IssueForm({ issue }: { issue?: Issue }) {
-  const { form, onSubmit } = useIssueForm();
+  const { form, onSubmit } = useIssueForm({ issue });
 
   return (
     <motion.div
@@ -41,7 +41,6 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
                 <FormLabel className="text-sm text-slate-600">Title</FormLabel>
                 <FormControl>
                   <Input
-                  defaultValue={issue?.title}
                     placeholder="Enter a short descriptive title"
                     className="rounded-xl border-slate-300 focus:ring-2 focus:ring-slate-400"
                     {...field}
@@ -56,7 +55,6 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
           <FormField
             control={form.control}
             name="description"
-            defaultValue={issue?.description}
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm text-slate-600">
@@ -64,7 +62,6 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
                 </FormLabel>
                 <FormControl>
                   <SimpleMDE
-                  
                     placeholder="Provide more details about the issue..."
                     {...field}
                   />
@@ -81,10 +78,12 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
           >
             {form.formState.isSubmitting ? (
               <>
-                <Spinner /> Submitting...
+                <Spinner /> {issue ? "Updating..." : "Submitting..."}
               </>
+            ) : issue ? (
+              "Update Issue"
             ) : (
-              "Submit"
+              "Submit Issue"
             )}
           </Button>
         </form>
