@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import StatusBadge from "@/components/StatusBadge";
 import ReactMarkdown from "react-markdown";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Pencil } from "lucide-react";
 
 interface Props {
   params: { id: string };
@@ -27,7 +30,19 @@ const IssueDetailPage = async ({ params }: Props) => {
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle className="text-2xl font-bold">{issue.title}</CardTitle>
-            <StatusBadge status={issue.status} />
+            <div className="flex items-center gap-2">
+              <StatusBadge status={issue.status} />
+              <Link href={`/issues/${issue.id}/edit`}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="rounded-xl flex items-center gap-2"
+                >
+                  <Pencil className="h-4 w-4" />
+                  Edit
+                </Button>
+              </Link>
+            </div>
           </div>
         </CardHeader>
         <Separator />
