@@ -6,17 +6,17 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { IssueForm } from "@/validations/issueSchema";
-import { issueSchema } from "@/app/validationSchemas";
+import { IssueFormType, issueSchema } from "@/validations/issueSchema";
+
 
 export const useIssueForm = () => {
   const router = useRouter();
 
-  const form = useForm<IssueForm>({
+  const form = useForm<IssueFormType>({
     resolver: zodResolver(issueSchema),
   });
 
-  const onSubmit = async (data: IssueForm) => {
+  const onSubmit = async (data: IssueFormType) => {
     try {
       await axios.post("/api/issues", data);
       toast.success("Issue created successfully!");

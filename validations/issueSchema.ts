@@ -1,6 +1,6 @@
 import z from "zod";
 
-export type IssueForm = z.infer<typeof issueSchema>;
+export type IssueFormType = z.infer<typeof issueSchema>;
 
 export const issueSchema = z.object({
   title: z
