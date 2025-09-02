@@ -1,8 +1,4 @@
-import React from "react";
-import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
-import { prisma } from "@/prisma/client";
+import StatusBadge from "@/components/StatusBadge";
 import {
   Table,
   TableBody,
@@ -11,7 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import StatusBadge from "@/components/StatusBadge";
+import { prisma } from "@/prisma/client";
+import IssueActions from "./IssueActions";
 
 const IssuesPage = async () => {
   const issueData = await prisma.issue.findMany({
@@ -21,12 +18,7 @@ const IssuesPage = async () => {
   return (
     <div className="max-w-5xl mx-auto p-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Issues</h1>
-        <Button asChild>
-          <Link href="/issues/new">New Issue</Link>
-        </Button>
-      </div>
+      <IssueActions />
 
       {/* Table */}
       <div className="rounded-2xl border shadow-sm overflow-hidden">
