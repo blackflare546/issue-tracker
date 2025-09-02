@@ -10,6 +10,7 @@ import {
 import { prisma } from "@/prisma/client";
 import IssueActions from "./IssueActions";
 import Link from "next/link";
+import removeMarkdown from "remove-markdown";
 
 const IssuesPage = async () => {
   const issueData = await prisma.issue.findMany({
@@ -50,8 +51,9 @@ const IssuesPage = async () => {
                   <TableCell>
                     <StatusBadge status={issue.status} />
                   </TableCell>
+
                   <TableCell className="truncate max-w-xs">
-                    {issue.description}
+                    {removeMarkdown(issue.description)}
                   </TableCell>
                   <TableCell className="text-right text-sm text-slate-500">
                     {new Date(issue.createdAt).toLocaleDateString()}

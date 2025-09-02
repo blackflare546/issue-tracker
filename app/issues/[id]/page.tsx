@@ -4,6 +4,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import StatusBadge from "@/components/StatusBadge";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
   params: { id: string };
@@ -30,12 +31,13 @@ const IssueDetailPage = async ({ params }: Props) => {
           </div>
         </CardHeader>
         <Separator />
-        <CardContent className="space-y-4 mt-4">
+        <CardContent className="space-y-4 mt-4 prose">
           <div>
             <h2 className="text-sm font-semibold text-slate-500 mb-1">
               Description
             </h2>
-            <p className="text-slate-700">{issue.description}</p>
+            {/* <p className="text-slate-700">{issue.description}</p> */}
+            <ReactMarkdown>{issue.description}</ReactMarkdown>
           </div>
           <div className="flex justify-between text-sm text-slate-500">
             <span>
