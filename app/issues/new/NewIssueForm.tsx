@@ -1,20 +1,24 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import "easymde/dist/easymde.min.css";
 import { motion } from "framer-motion";
-import SimpleMDE from "react-simplemde-editor";
 import { useIssueForm } from "./useIssueForm";
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
 
 export default function NewIssueForm() {
   const { form, onSubmit } = useIssueForm();

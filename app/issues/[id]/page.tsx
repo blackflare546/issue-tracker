@@ -36,7 +36,6 @@ const IssueDetailPage = async ({ params }: Props) => {
             <h2 className="text-sm font-semibold text-slate-500 mb-1">
               Description
             </h2>
-            {/* <p className="text-slate-700">{issue.description}</p> */}
             <ReactMarkdown>{issue.description}</ReactMarkdown>
           </div>
           <div className="flex justify-between text-sm text-slate-500">
