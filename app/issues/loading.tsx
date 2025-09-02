@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import IssueActions from "./IssueActions";
+import IssueActions from "./components/IssueActions";
 
 const LoadingIssuesPage = () => {
   return (

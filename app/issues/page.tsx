@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { prisma } from "@/prisma/client";
-import IssueActions from "./IssueActions";
+import IssueActions from "./components/IssueActions";
 import Link from "next/link";
 import removeMarkdown from "remove-markdown";
 
